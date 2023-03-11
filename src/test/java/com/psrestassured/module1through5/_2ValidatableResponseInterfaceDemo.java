@@ -1,4 +1,4 @@
-package com.psrestassured;
+package com.psrestassured.module1through5;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

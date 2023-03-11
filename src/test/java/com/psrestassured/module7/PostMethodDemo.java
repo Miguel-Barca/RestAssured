@@ -7,7 +7,7 @@ public class PostMethodDemo {
 
     public static final String BASE_URL = "https://api.github.com/user/repos";
 
-    public static final String TOKEN = "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";
+    public static final String TOKEN = "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"; //This is deleted after pushed to github. You should generate a new token to run the code
 
     @Test(description = "Failing test")
     public void postTestWithoutCredentials() {
@@ -34,4 +34,28 @@ public class PostMethodDemo {
                     .statusCode(201);
     }
 
+    @Test(description = "Update Repo")
+    public void patchTestWithCredentials() {
+
+        RestAssured
+                .given()
+                    .header("Authorization", "token " + TOKEN)
+                    .body("{\"name\": \"deleteme-patched\"}")
+                .when()
+                    .patch("https://api.github.com/repos/Miguel-Barca/deleteme")
+                .then()
+                    .statusCode(200);
+    }
+
+    @Test(description = "Deleting Repo")
+    public void deleteTestWithCredentials() {
+
+        RestAssured
+                .given()
+                .header("Authorization", "token " + TOKEN)
+                .when()
+                .delete("https://api.github.com/repos/Miguel-Barca/deleteme-patched")
+                .then()
+                .statusCode(204);
+    }
 }
